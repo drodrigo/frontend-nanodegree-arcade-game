@@ -107,6 +107,7 @@ var Engine = (function(global) {
         /* This array holds the relative URL to the image used
          * for that particular row of the game level.
          */
+        var player = new Player();
         var rowImages = [
                 'images/water-block.png',   // Top row is water
                 'images/stone-block.png',   // Row 1 of 3 of stone
@@ -133,10 +134,9 @@ var Engine = (function(global) {
                  * we're using them over and over.
                  */
                 ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
+
             }
         }
-
-
         renderEntities();
     }
 
@@ -152,7 +152,12 @@ var Engine = (function(global) {
             enemy.render();
         });
 
-        player.render();
+        //Positioning player image (half of the canvas size  -  halft of the player's image)
+        playerWidth = (canvas.width/2) - 50.5;
+        
+        //Same thing but positioning the player at the bottom of the canvas.
+        playerHeight = (canvas.height) - 171;
+        player.render(playerWidth,playerHeight);
     }
 
     /* This function does nothing but it could have been a good place to
