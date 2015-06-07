@@ -13,6 +13,8 @@ var Enemy = function(x,y) {
     this.x  = x;
     this.y = y;
     this.speed = Math.floor(Math.random() * (100)) + 50;
+    this.width = 50;
+    this.height = 50;
 }
 
 // Update the enemy's position, required method for game
@@ -25,9 +27,9 @@ Enemy.prototype.update = function(dt) {
       enemies[i].x  += dt * enemies[i].speed;
 
       if(enemies[i].x > 505){
-         enemies[i].x = 2;
+         enemies[i].x = -100;
          //Changing speed after reseting an enemy
-         enemies[i].speed = Math.floor(Math.random() * (100)) + 50;
+         enemies[i].speed = Math.floor(Math.random() * (100)) + 50
       }
     }
 
@@ -45,10 +47,21 @@ var Player = function(x,y){
   this.sprite = 'images/char-boy.png';
   this.x  = x;
   this.y = y;
+  this.width = 50;
+  this.height = 50;
 }
 
 Player.prototype.update = function(){
-
+  for(var i=0; i < 4; i++){
+    //console.log("Enemy: " + Math.floor(enemies[i].x));
+    //console.log("Player: " + Math.floor(player.x));
+    if(Math.floor(enemies[i].x) < Math.floor(player.x) + Math.floor(player.width) &&
+       Math.floor(enemies[i].x) + Math.floor(enemies[i].width) > Math.floor(player.x) &&
+       Math.floor(enemies[i].y) < Math.floor(player.y) + Math.floor(player.height) &&
+       Math.floor(enemies[i].height) + Math.floor(enemies[i].y) > Math.floor(player.y)){
+         console.log("Collision detected modafocaaa!!");
+     }
+  }
 }
 
 Player.prototype.render = function(){
