@@ -12,7 +12,7 @@ var Enemy = function(x,y) {
     this.sprite = 'images/enemy-bug.png';
     this.x  = x;
     this.y = y;
-      this.speed = Math.floor(Math.random() * (200)) + 80;
+    this.speed = Math.floor(Math.random() * (100)) + 50;
 }
 
 // Update the enemy's position, required method for game
@@ -23,7 +23,14 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     for(var  i=0; i< 4; i++){
       enemies[i].x  += dt * enemies[i].speed;
+
+      if(enemies[i].x > 505){
+         enemies[i].x = 2;
+         //Changing speed after reseting an enemy
+         enemies[i].speed = Math.floor(Math.random() * (100)) + 50;
+      }
     }
+
 }
 
 // Draw the enemy on the screen, required method for game
@@ -68,7 +75,7 @@ Player.prototype.handleInput = function(key){
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var enemyX = 2, enemyY = 50;
+var enemyX = -100, enemyY = 50;
 var enemies = [];
 for(var i=0; i< 4; i++){
   var enemy = new Enemy(enemyX,enemyY);
