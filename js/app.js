@@ -12,6 +12,7 @@ var Enemy = function(x,y) {
     this.sprite = 'images/enemy-bug.png';
     this.x  = x;
     this.y = y;
+      this.speed = Math.floor(Math.random() * (200)) + 80;
 }
 
 // Update the enemy's position, required method for game
@@ -20,6 +21,9 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    for(var  i=0; i< 4; i++){
+      enemies[i].x  += dt * enemies[i].speed;
+    }
 }
 
 // Draw the enemy on the screen, required method for game
@@ -63,10 +67,18 @@ Player.prototype.handleInput = function(key){
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var enemy = new Enemy(100,100);
+
+var enemyX = 2, enemyY = 50;
+var enemies = [];
+for(var i=0; i< 4; i++){
+  var enemy = new Enemy(enemyX,enemyY);
+
+  enemyY +=85;
+  enemies.push(enemy);
+
+}
 var player = new Player(INITIAL_PLAYER_WIDTH, INITIAL_PLAYER_HEIGHT);
-var allEnemies = [];
-allEnemies.push(enemy);
+var allEnemies = enemies;
 
 
 // This listens for key presses and sends the keys to your
