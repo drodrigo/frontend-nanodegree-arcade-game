@@ -1,7 +1,8 @@
 //CONSTANTS
 var INITIAL_PLAYER_WIDTH = 202;
 var INITIAL_PLAYER_HEIGHT = 400;
-
+var CANVAS_HEIGHT = 606;
+var CANVAS_WIDTH = 505;
 // Enemies our player must avoid
 var Enemy = function(x,y) {
     // Variables applied to each of our instances go here,
@@ -53,13 +54,11 @@ var Player = function(x,y){
 
 Player.prototype.update = function(){
   for(var i=0; i < 4; i++){
-    //console.log("Enemy: " + Math.floor(enemies[i].x));
-    //console.log("Player: " + Math.floor(player.x));
     if(Math.floor(enemies[i].x) < Math.floor(player.x) + Math.floor(player.width) &&
        Math.floor(enemies[i].x) + Math.floor(enemies[i].width) > Math.floor(player.x) &&
        Math.floor(enemies[i].y) < Math.floor(player.y) + Math.floor(player.height) &&
        Math.floor(enemies[i].height) + Math.floor(enemies[i].y) > Math.floor(player.y)){
-         console.log("Collision detected modafocaaa!!");
+         player.y = INITIAL_PLAYER_HEIGHT;
      }
   }
 }
@@ -71,16 +70,21 @@ Player.prototype.render = function(){
 Player.prototype.handleInput = function(key){
   switch(key){
     case 'up':
-      player.y += -82;
+      if(player.y > 0)
+         player.y += -82;
       break;
     case 'left':
-      player.x += -100;
+      if(player.x > 5)
+         player.x += -100;
       break;
     case 'right':
-      player.x += 100;
+      if(player.x < CANVAS_WIDTH - 110)
+         player.x += 100;
       break;
     case 'down':
-      player.y += 82;
+      if(player.y < INITIAL_PLAYER_HEIGHT)
+        player.y += 82;
+
       break;
   }
 }
